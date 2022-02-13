@@ -5,7 +5,7 @@
       color="primary"
       dark
     >
-    <h1>Ringi koor</h1>
+    <h1>Ringi koori maksuamet</h1>
     </v-app-bar>
 
     <v-main>
@@ -18,9 +18,5 @@
 
 export default {
   name: 'App',
-
-  data: () => ({
-    //
-  }),
 };
 </script>
