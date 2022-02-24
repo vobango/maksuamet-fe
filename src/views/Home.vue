@@ -42,7 +42,7 @@ import superagent from 'superagent';
       members: []
     }),
     created: function() {
-      superagent.get('http://localhost:8001/api/members')
+      superagent.get('/api/members')
         .withCredentials()
         .then((res) => {
           this.members = res.body.data.map(item => ({ ...item, balance: item.balance.toFixed(2) })) || [];
