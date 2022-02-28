@@ -5,11 +5,13 @@
       color="primary"
       dark
     >
-    <h1>Ringi koori maksuamet</h1>
+    <h1>MTÜ Ringi Koor maksuamet</h1>
     </v-app-bar>
 
     <v-main>
-      <router-view/>
+      <v-container>
+        <router-view/>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -20,3 +22,9 @@ export default {
   name: 'App',
 };
 </script>
+
+<style>
+.v-main {
+  background: rgb(250, 250, 255);
+}
+</style>
