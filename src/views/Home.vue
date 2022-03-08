@@ -63,7 +63,9 @@
         :search="search"
         fixed-header
         height="60vh"
-        ></v-data-table>
+        >
+      </v-data-table>
+      <div class="text-right mx-8 py-4 font-weight-bold text-h5">Bilanss kokku: {{ totalBalance }} €</div>
     </v-card>
   </v-container>
 </template>
@@ -85,7 +87,7 @@ export default {
         value: 'balance'
       }
     ],
-    members: []
+    members: [],
   }),
   created: function() {
     superagent.get('/api/members')
@@ -96,7 +98,14 @@ export default {
         }
 
         this.members = res.body.data.map(item => ({ ...item, balance: item.balance.toFixed(2) })) || [];
-      })
+      });
+  },
+  computed: {
+    totalBalance: function() {
+      return this.members.reduce((sum, member) => {
+        return sum + parseFloat(member.balance);
+      }, 0).toFixed(2);
+    }
   }
 }
 </script>
