@@ -66,7 +66,7 @@
         @click:row="openMemberView"
         >
       </v-data-table>
-      <div class="text-right mx-8 py-4 font-weight-bold text-h5">Bilanss kokku: {{ totalBalance }} €</div>
+      <div class="text-right mx-8 py-4 font-weight-bold text-h5">Bilanss kokku: {{ totalBalance }}</div>
     </v-card>
 
     <v-dialog v-model="dialog" width="600">
@@ -137,10 +137,12 @@ export default {
       id: null,
     },
     dialog: false,
+    totalBalance: "0 €",
   }),
   methods: {
     openMemberView: function(value) {
       superagent.get(`/api/member?id=${value.id}`)
+        .withCredentials()
         .then((res) => {
           if (!res.body) {
             return;
@@ -164,14 +166,14 @@ export default {
 
         this.members = res.body.data || [];
       });
+    superagent.get('/api/totalBalance')
+      .withCredentials()
+      .then((res) => {
+          if (!res.body) return;
+
+          this.totalBalance = res.body.data;
+      })
     this.dialog = false;
-  },
-  computed: {
-    totalBalance: function() {
-      return this.members.reduce((sum, member) => {
-        return sum + parseFloat(member.balance);
-      }, 0).toFixed(2);
-    }
   }
 }
 </script>
