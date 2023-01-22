@@ -87,6 +87,7 @@
         </v-card-title>
         <v-data-table
           dense
+          :sort-by.sync="detailsSortBy"
           :headers="memberDetailsHeaders"
           :items="member.bills"
           :items-per-page="-1"
@@ -106,6 +107,7 @@ import superagent from 'superagent';
 export default {
   name: 'home-component',
   data: () => ({
+    detailsSortBy: "paid",
     membersListSearch: '',
     memberDetailsSearch: '',
     membersListHeaders: [
