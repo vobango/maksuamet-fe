@@ -5,7 +5,18 @@
       color="primary"
       dark
     >
-    <h1>MTÜ Ringi Koor maksuamet</h1>
+      <v-app-bar-title><b>MTÜ Ringi Koor maksuamet</b></v-app-bar-title>
+      <template v-slot:extension>
+        <v-tabs
+          v-model="tab"
+          bg-color="primary"
+          grow
+        >
+          <v-tab value="liikmed" to="liikmed">Liikmed</v-tab>
+          <v-tab value="sündmused" to="syndmused">Sündmused</v-tab>
+          <v-tab value="info" to="info">Info</v-tab>
+        </v-tabs>
+      </template>
     </v-app-bar>
 
     <v-main>
@@ -20,6 +31,11 @@
 
 export default {
   name: 'App',
+  data() {
+    return {
+      tab: 'liikmed',
+    }
+  }
 };
 </script>
 
