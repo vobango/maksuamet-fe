@@ -35,7 +35,7 @@
           <v-text-field
             v-model="eventDetailsSearch"
             append-icon="mdi-magnify"
-            label="Otsi sündmust"
+            label="Otsi osalejat"
             single-line
             hide-details
             ></v-text-field>
