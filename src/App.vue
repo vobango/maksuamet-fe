@@ -5,7 +5,7 @@
       color="primary"
       dark
     >
-      <v-app-bar-title><b>MTÜ Ringi Koor maksuamet</b></v-app-bar-title>
+      <v-app-bar-title><b>Ringi Koor</b></v-app-bar-title>
       <template v-slot:extension>
         <v-tabs
           v-model="tab"
