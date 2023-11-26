@@ -15,6 +15,7 @@
           <v-tab value="liikmed" to="liikmed">Liikmed</v-tab>
           <v-tab value="sündmused" to="syndmused">Sündmused</v-tab>
           <v-tab value="info" to="info">Info</v-tab>
+          <v-tab value="sünnipäevad" to="synnipaevad">Sünnipäevad</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>

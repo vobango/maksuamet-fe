@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Members from './views/members-component.vue';
 import Events from './views/syndmused-component.vue';
 import Info from './views/info-component.vue';
+import Birthdays from './views/synnipaevad-component.vue';
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
           path: '/info',
           name: 'Info',
           component: Info
+        },
+        {
+          path: '/synnipaevad',
+          name: 'Birthdays',
+          component: Birthdays
         }
     ]
 });

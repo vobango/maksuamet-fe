@@ -32,26 +32,72 @@
           <v-spacer></v-spacer>
           <v-btn icon @click="closeMemberView"><v-icon large>mdi-close</v-icon></v-btn>
         </v-card-title>
-        <v-card-title>
-          <v-text-field
-            v-model="memberDetailsSearch"
-            append-icon="mdi-magnify"
-            label="Otsi arvet"
-            single-line
-            hide-details
-            ></v-text-field>
-        </v-card-title>
-        <v-data-table
-          dense
-          :sort-by.sync="detailsSortBy"
-          :headers="memberDetailsHeaders"
-          :items="member.bills"
-          :items-per-page="-1"
-          :search="memberDetailsSearch"
-          fixed-header
-          height="60vh"
-        >
-        </v-data-table>
+        <template>
+            <v-card>
+              <v-tabs
+                bg-color="primary"
+                grow
+              >
+                <v-tab
+                key="bills">Arved</v-tab>
+                <v-tab
+                key="payments">Ülekanded</v-tab>
+
+                <v-tab-item
+                  key="bills"
+                >
+                    <v-container fluid>
+                      <v-card-title>
+                        <v-text-field
+                          v-model="memberDetailsSearch"
+                          append-icon="mdi-magnify"
+                          label="Otsi arvet"
+                          single-line
+                          hide-details
+                          ></v-text-field>
+                      </v-card-title>
+                      <v-data-table
+                        dense
+                        :sort-by.sync="detailsSortBy"
+                        :headers="memberDetailsHeaders"
+                        :items="member.bills"
+                        :items-per-page="-1"
+                        :search="memberDetailsSearch"
+                        fixed-header
+                        height="60vh"
+                      >
+                      </v-data-table>
+                    </v-container>
+                </v-tab-item>
+                <v-tab-item
+                  key="payments"
+                >
+                  <v-container fluid>
+                    <v-card-title>
+                      <v-text-field
+                        v-model="memberDetailsSearch"
+                        append-icon="mdi-magnify"
+                        label="Otsi arvet"
+                        single-line
+                        hide-details
+                        ></v-text-field>
+                    </v-card-title>
+                    <v-data-table
+                      dense
+                      :sort-by.sync="detailsSortBy"
+                      :headers="memberBillingHeaders"
+                      :items="member.payments"
+                      :items-per-page="-1"
+                      :search="memberDetailsSearch"
+                      fixed-header
+                      height="60vh"
+                    >
+                    </v-data-table>
+                  </v-container>
+                </v-tab-item>
+              </v-tabs>
+            </v-card>
+        </template>
       </v-card>
     </v-dialog>
   </v-container>
@@ -88,6 +134,20 @@ export default {
       {
         text: 'Summa',
         value: 'amount'
+      }
+    ],
+    memberBillingHeaders: [
+      {
+        text: 'Makse kirjeldus',
+        value: 'description'
+      },
+      {
+        text: 'Makstud',
+        value: 'amount'
+      },
+      {
+        text: 'Kuupäev',
+        value: 'date'
       }
     ],
     members: [],
