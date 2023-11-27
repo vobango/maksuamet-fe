@@ -25,23 +25,31 @@
         </v-btn>
       </v-sheet>
 
-      <v-sheet height="600">
+      <v-sheet height="50vh">
         <v-calendar
             ref="calendar"
             v-model="value"
             event-overlap-mode="column"
             event-color="blue"
             color="light-blue"
-            locale="et"
             type="month"
             :weekdays="weekday"
             :events="events"
             @change="getEvents"
+            @click:event="handleEventClick"
             ></v-calendar>
       </v-sheet>
     </v-card>
 
-
+    <v-dialog v-model="dialog" width="600">
+      <v-card>
+        <v-card-title>
+          <h1>{{ selectedMember.name }} - {{ selectedMember.birthday }}</h1>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="closeEventView"><v-icon large>mdi-close</v-icon></v-btn>
+        </v-card-title>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -52,6 +60,7 @@ export default {
   name: 'synnipaevad-component',
   data: () => ({
     members: [],
+    selectedMember: {},
     events: [],
     months: [
       'Jaanuar',
@@ -71,6 +80,7 @@ export default {
     currentYear: '',
     value: '',
     weekday: [1, 2, 3, 4, 5, 6, 0],
+    dialog: false,
   }),
   methods: {
     createEvents(startDay) {
@@ -97,12 +107,27 @@ export default {
 
       this.events = birthdaysThisMonth;
     },
+
     getEvents({ start }) {
       this.createEvents(start.date);
 
       this.currentMonth = this.months[start.month - 1];
       this.currentYear = start.year;
     },
+
+    closeEventView() {
+      this.dialog = false;
+      this.selectedMember = {};
+    },
+
+    handleEventClick(e) {
+      this.selectedMember = {
+        name: e.eventParsed.input.name,
+        birthday: `${e.eventParsed.end.day}.${e.eventParsed.end.month}.${e.eventParsed.end.year}`
+      }
+
+      this.dialog = true;
+    }
   },
   created: function() {
       superagent.get('/api/birthdays')
