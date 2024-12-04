@@ -7,8 +7,8 @@
           <p>
             Igakuine liikmemaks on<br /> 
             <strong>
-              5€ - tudeng/õpilane/vabakutseline<br />
-              8€ - kõik teised
+              4€ - tudeng/õpilane/vabakutseline<br />
+              10€ - kõik teised
             </strong>
           </p>
             <p>
