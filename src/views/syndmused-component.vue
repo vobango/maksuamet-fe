@@ -93,7 +93,7 @@ export default {
   }),
   methods: {
     openEventView: function(value) {
-      superagent.get(`/api/event?id=${value.name}`)
+      superagent.get(`/api/event?id=${encodeURIComponent(value.name)}`)
         .withCredentials()
         .then((res) => {
           if (!res.body) {
