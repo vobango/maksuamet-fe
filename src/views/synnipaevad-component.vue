@@ -37,17 +37,38 @@
             :events="events"
             @change="getEvents"
             @click:event="handleEventClick"
+            @click:more="handleMoreClick"
             ></v-calendar>
       </v-sheet>
     </v-card>
 
     <v-dialog v-model="dialog" width="600">
       <v-card>
-        <v-card-title>
-          <h1>{{ selectedMember.name }} - {{ selectedMember.birthday }}</h1>
+        <v-card-title class="d-flex">
+          <div>
+            <h2 class="text-h5 mb-1">Sünnipäevad</h2>
+            <div class="text-subtitle-1" v-if="selectedDate">{{ selectedDate }}</div>
+          </div>
           <v-spacer></v-spacer>
           <v-btn icon @click="closeEventView"><v-icon large>mdi-close</v-icon></v-btn>
         </v-card-title>
+
+        <v-card-text>
+          <v-list class="pa-0">
+            <v-list-item v-for="(member, index) in selectedMembers" :key="member.name">
+              <v-list-item-avatar
+                size="20"
+                color="primary"
+                class="white--text caption"
+              >
+                {{ index + 1 }}
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title>{{ member.name }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
       </v-card>
     </v-dialog>
   </v-container>
@@ -60,7 +81,8 @@ export default {
   name: 'synnipaevad-component',
   data: () => ({
     members: [],
-    selectedMember: {},
+    selectedMembers: [],
+    selectedDate: null,
     events: [],
     months: [
       'Jaanuar',
@@ -117,16 +139,39 @@ export default {
 
     closeEventView() {
       this.dialog = false;
-      this.selectedMember = {};
+      this.selectedMembers = [];
+      this.selectedDate = null;
     },
 
     handleEventClick(e) {
-      this.selectedMember = {
-        name: e.eventParsed.input.name,
-        birthday: `${e.eventParsed.end.day}.${e.eventParsed.end.month}.${e.eventParsed.end.year}`
-      }
+      const day = e.eventParsed.end.day;
+      const month = e.eventParsed.end.month;
+      const year = e.eventParsed.end.year;
+      
+      this.selectedDate = `${day}.${month}.${year}`;
+      this.selectedMembers = [{
+        name: e.eventParsed.input.name
+      }];
 
       this.dialog = true;
+    },
+
+    handleMoreClick({ date }) {
+      const [year, month, day] = date.split('-').map(Number);
+      
+      this.selectedDate = `${day}.${month}.${year}`;
+      this.selectedMembers = this.members
+        .filter(member => {
+          const [memberDay, memberMonth] = member.birthday.split('.');
+          return parseInt(memberDay) === day && parseInt(memberMonth) === month;
+        })
+        .map(member => ({
+          name: member.name
+        }));
+
+      if (this.selectedMembers.length > 0) {
+        this.dialog = true;
+      }
     }
   },
   created: function() {
@@ -154,5 +199,11 @@ h2 {
   align-items: center;
   display: flex;
   justify-content: center;
+}
+
+.v-list-item__avatar {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: 16px !important;
 }
 </style>
