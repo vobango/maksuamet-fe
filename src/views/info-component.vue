@@ -2,20 +2,23 @@
   <v-container>
     <div class="d-flex flex-column flex-md-row">
       <v-card class="mr-md-4 mb-4 flex-grow-1">
-        <v-card-title>Liikmemaks</v-card-title>
+        <v-card-title>Maksud</v-card-title>
         <v-card-text>
-          <p>
-            Igakuine liikmemaks on<br /> 
-            <strong>
-              7€ - tudeng/õpilane/vabakutseline<br />
-              10€ - kõik teised
-            </strong>
-          </p>
-            <p>
+          <ol>
+            <li>
+              Igakuine liikmemaks on:<br /> 
+              <strong>
+                7€ - tudeng/õpilane/vabakutseline<br />
+                10€ - kõik teised
+              </strong><br />
               Koori hooaeg kestab sept-mai (k.a.) see on siis 9 kuud.<br />
               Kui on laulupeo aasta või mõni muu suvine projekt, mille jaoks tuleb ka juunis proove teha, siis 10 kuud.<br />
               Uutele lauljatele on esimene kuu tasuta, nimetagem seda siis tutvumiskuuks.
-            </p>
+            </li>
+            <li>
+              Koorilaagrid on eraldi tasu eest ning jagatakse <strong>kõigi aktiivsete liikmete vahel</strong> sõltumata sellest, kes osales või puudus.
+            </li>
+          </ol>
         </v-card-text>
       </v-card>
 
